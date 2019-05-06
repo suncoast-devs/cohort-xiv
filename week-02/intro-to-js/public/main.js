@@ -20,6 +20,18 @@ const addSevenToCount = () => {
   updateCounterInHtml()
 }
 
+const sayGreeting = () => {
+  // grab the text from the input field
+  const name = document.querySelector('.nameInput').value
+  console.log(name)
+  // update the HTML with a greeting + name
+  document.querySelector('.output').textContent = 'Hello, ' + name
+}
+
 document.addEventListener('DOMContentLoaded', main)
 document.querySelector('button').addEventListener('click', buttonClickEvent)
 document.querySelector('.addSeven').addEventListener('click', addSevenToCount)
+// when the user clicks the .say-greeting-button
+document
+  .querySelector('.say-greeting-button')
+  .addEventListener('click', sayGreeting)
