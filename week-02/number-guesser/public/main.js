@@ -14,6 +14,8 @@ const compareGuess = () => {
   if (!isNaN(guess)) {
     // check if it the number is in the range
     if (guess <= 25 && guess >= 1) {
+      console.log('range was hit')
+      console.log(document.querySelector('.result'))
       if (guess === targetNumber) {
         document.querySelector('.result').textContent = 'Correct!'
       } else if (guess > targetNumber) {
