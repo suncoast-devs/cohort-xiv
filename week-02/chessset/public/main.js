@@ -25,6 +25,13 @@ const main = () => {
       chessSet.push(piece)
     }
   }
+
+  colors.forEach(color => {
+    positions.forEach(position => {
+      chessSet.push(color + ' ' + position)
+    })
+  })
+
   console.log(chessSet)
   // this is where I shuffle the chessSet
 }
