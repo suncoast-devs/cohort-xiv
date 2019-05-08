@@ -7,9 +7,8 @@ const villains = [
   'that guy from Mulan'
 ]
 
-const main = () => {
-  console.log(villains.length)
-  // for each villain,
+const renderVillains = () => {
+  document.querySelector('.villains').textContent = ''
   for (let i = 0; i < villains.length; i++) {
     const villain = villains[i]
     console.log(villain)
@@ -20,5 +19,20 @@ const main = () => {
     document.querySelector('.villains').appendChild(listItem)
   }
 }
+
+const main = () => {
+  console.log(villains.length)
+  renderVillains()
+}
+const addVillain = () => {
+  //
+  const newVillain = document.querySelector('.add-a-villain').value
+  if (newVillain) {
+    villains.push(newVillain)
+    renderVillains()
+  }
+}
+
+document.querySelector('.add-button').addEventListener('click', addVillain)
 
 document.addEventListener('DOMContentLoaded', main)
