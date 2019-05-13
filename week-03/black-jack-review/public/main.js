@@ -135,12 +135,15 @@ const playerHit = () => {
     // and disable the hit button
     setPlayerButtonsEnablablity(true)
     showDealerHand()
+    // show the reset button
+    document.querySelector('.reset-button').classList.remove('hide')
   }
 }
 
 const playerStay = () => {
   // disable the hit button & stay button
   setPlayerButtonsEnablablity(true)
+  document.querySelector('.reset-button').classList.remove('hide')
 
   // reveal dealer hand
   showDealerHand()
@@ -197,6 +200,7 @@ const resetGame = () => {
   dealCardToPlayer()
   dealCardToDealer()
   dealCardToDealer()
+  document.querySelector('.reset-button').classList.add('hide')
 }
 
 const main = () => {
