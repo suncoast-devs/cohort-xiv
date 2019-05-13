@@ -25,19 +25,22 @@ let dealerScore = 0
 
 // basic logic
 const createDeck = () => {
-  for (let i = 0; i < suits.length; i++) {
-    const suit = suits[i]
-    for (let j = 0; j < faces.length; j++) {
-      const card = {
-        rank: faces[j].rank,
-        value: faces[j].value,
-        suits: suit,
-        imageUrl: '/images/cards/' + faces[j].rank + '_of_' + suit + '.svg'
-      }
+  deck = []
+  for (let _ = 0; _ < 3; _++) {
+    for (let i = 0; i < suits.length; i++) {
+      const suit = suits[i]
+      for (let j = 0; j < faces.length; j++) {
+        const card = {
+          rank: faces[j].rank,
+          value: faces[j].value,
+          suits: suit,
+          imageUrl: '/images/cards/' + faces[j].rank + '_of_' + suit + '.svg'
+        }
 
-      // Push creation to deck//
-      deck.push(card)
-      console.log('card pushed to deck')
+        // Push creation to deck//
+        deck.push(card)
+        console.log('card pushed to deck')
+      }
     }
   }
 }
@@ -95,9 +98,10 @@ const dealCardToDealer = () => {
 }
 
 // HTML helpers
-const disablePlayerActions = () => {
-  document.querySelector('.hit-button').disabled = true
-  document.querySelector('.stay-button').disabled = true
+
+const setPlayerButtonsEnablablity = status => {
+  document.querySelector('.hit-button').disabled = status
+  document.querySelector('.stay-button').disabled = status
 }
 
 const showDealerHand = () => {
@@ -129,14 +133,14 @@ const playerHit = () => {
     // busted
     displayMessage('Busted!')
     // and disable the hit button
-    disablePlayerActions()
+    setPlayerButtonsEnablablity(true)
     showDealerHand()
   }
 }
 
 const playerStay = () => {
   // disable the hit button & stay button
-  disablePlayerActions()
+  setPlayerButtonsEnablablity(true)
 
   // reveal dealer hand
   showDealerHand()
@@ -173,6 +177,28 @@ const playerStay = () => {
   }
 }
 
+const resetGame = () => {
+  if (deck.length < 10) {
+    createDeck()
+  }
+  // scores needs reset
+  playerHand = []
+  playerScore = 0
+  document.querySelector('.player-hand').textContent = ''
+  dealerHand = []
+  dealerScore = 0
+  document.querySelector('.dealer-hand').textContent = ''
+  displayMessage('')
+  // renable buttons
+  setPlayerButtonsEnablablity(false)
+  // hands need to reset
+  shuffleDeck()
+  dealCardToPlayer()
+  dealCardToPlayer()
+  dealCardToDealer()
+  dealCardToDealer()
+}
+
 const main = () => {
   createDeck()
   shuffleDeck()
@@ -185,3 +211,4 @@ const main = () => {
 document.addEventListener('DOMContentLoaded', main)
 document.querySelector('.hit-button').addEventListener('click', playerHit)
 document.querySelector('.stay-button').addEventListener('click', playerStay)
+document.querySelector('.reset-button').addEventListener('click', resetGame)
