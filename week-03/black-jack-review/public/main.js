@@ -1,4 +1,4 @@
-const suits = ['Hearts', 'Clubs', 'Spade', 'Diamonds']
+const suits = ['hearts', 'clubs', 'spades', 'diamonds']
 
 const faces = [
   { rank: 'Ace', value: 11 },
@@ -18,6 +18,10 @@ const faces = [
 
 let deck = []
 let playerHand = []
+let playerScore = 0
+
+let dealerHand = []
+let dealerScore = 0
 
 const createDeck = () => {
   for (let i = 0; i < suits.length; i++) {
@@ -27,14 +31,9 @@ const createDeck = () => {
         rank: faces[j].rank,
         value: faces[j].value,
         suits: suit,
-        imageUrl:
-          './stills/' + faces[j].rank.slice(0, 1) + suit.slice(0, 1) + '.jpg'
+        imageUrl: '/images/cards/' + faces[j].rank + '_of_' + suit + '.svg'
       }
 
-      if (card.rank === '10') {
-        // Set the imageUrl of the card to the correct value
-        card.imageUrl = './still/' + '10' + suit.slice(0, 1) + '.jpg'
-      }
       // Push creation to deck//
       deck.push(card)
       console.log('card pushed to deck')
@@ -67,6 +66,47 @@ const dealCardToPlayer = () => {
   // li.appendChild(img)
   document.querySelector('.player-hand').appendChild(img)
   // update the player score
+  // add the value of the card to the player
+  playerScore += dealtCard.value
+  // update the html
+  document.querySelector('.player-score').textContent = playerScore
+}
+
+const dealCardToDealer = () => {
+  // remove one card from the deck (pop)
+  const dealtCard = deck.pop()
+  // add to dealer hand (push)
+  dealerHand.push(dealtCard)
+  // add the new card to the HTML
+  // create the new element
+  const img = document.createElement('img')
+  // set the content
+  img.src = '/images/cards/card-back.png'
+  // add new element to the HTML
+  // const li = document.createElement('li')
+  // li.appendChild(img)
+  document.querySelector('.dealer-hand').appendChild(img)
+  // update the dealer score
+  // add the value of the card to the dealer
+  dealerScore += dealtCard.value
+  // update the html
+  document.querySelector('.dealer-score').textContent = dealerScore
+}
+
+const playerHit = () => {
+  console.log('hitting and stuff')
+  // pop/push to player hand
+  // display the card
+  // update the total
+  dealCardToPlayer()
+  // some logic if  total > 21, display bust message
+  if (playerScore > 21) {
+    // busted
+    document.querySelector('.message').textContent = 'Busted!'
+    // and disable the hit button
+    document.querySelector('.hit-button').disabled = true
+    document.querySelector('.stay-button').disabled = true
+  }
 }
 
 const main = () => {
@@ -74,8 +114,9 @@ const main = () => {
   shuffleDeck()
   dealCardToPlayer()
   dealCardToPlayer()
-  // dealCardToDealer()
-  // dealCardToDealer()
+  dealCardToDealer()
+  dealCardToDealer()
 }
 
 document.addEventListener('DOMContentLoaded', main)
+document.querySelector('.hit-button').addEventListener('click', playerHit)
