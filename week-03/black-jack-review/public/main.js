@@ -136,7 +136,17 @@ const playerHit = () => {
     setPlayerButtonsEnablablity(true)
     showDealerHand()
     // show the reset button
-    document.querySelector('.reset-button').classList.remove('hide')
+    // document.querySelector('.reset-button').classList.remove('hide')
+    // create the button
+    const btn = document.createElement('button')
+    // set the text context
+    btn.textContent = 'reset game'
+    // add the styling (if any)
+    btn.classList.add('reset-button')
+    // add the event
+    btn.onclick = resetGame
+    // add the button to the HTML(DOM)
+    document.querySelector('.reset-button-container').appendChild(btn)
   }
 }
 
@@ -200,7 +210,8 @@ const resetGame = () => {
   dealCardToPlayer()
   dealCardToDealer()
   dealCardToDealer()
-  document.querySelector('.reset-button').classList.add('hide')
+  // document.querySelector('.reset-button').classList.add('hide')
+  document.querySelector('.reset-button-container').textContent = ''
 }
 
 const main = () => {
@@ -215,4 +226,4 @@ const main = () => {
 document.addEventListener('DOMContentLoaded', main)
 document.querySelector('.hit-button').addEventListener('click', playerHit)
 document.querySelector('.stay-button').addEventListener('click', playerStay)
-document.querySelector('.reset-button').addEventListener('click', resetGame)
+// document.querySelector('.reset-button').addEventListener('click', resetGame)
