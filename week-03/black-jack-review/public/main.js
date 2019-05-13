@@ -23,6 +23,7 @@ let playerScore = 0
 let dealerHand = []
 let dealerScore = 0
 
+// basic logic
 const createDeck = () => {
   for (let i = 0; i < suits.length; i++) {
     const suit = suits[i]
@@ -93,6 +94,30 @@ const dealCardToDealer = () => {
   document.querySelector('.dealer-score').textContent = dealerScore
 }
 
+// HTML helpers
+const disablePlayerActions = () => {
+  document.querySelector('.hit-button').disabled = true
+  document.querySelector('.stay-button').disabled = true
+}
+
+const showDealerHand = () => {
+  // remove the card backs
+  document.querySelector('.dealer-hand').textContent = ''
+  // foreach card in dealer hand
+  for (let i = 0; i < dealerHand.length; i++) {
+    const card = dealerHand[i]
+    const img = document.createElement('img')
+    img.src = card.imageUrl
+    // add that card to the html
+    document.querySelector('.dealer-hand').appendChild(img)
+  }
+}
+
+const displayMessage = message => {
+  document.querySelector('.message').textContent = message
+}
+
+// events
 const playerHit = () => {
   console.log('hitting and stuff')
   // pop/push to player hand
@@ -102,10 +127,49 @@ const playerHit = () => {
   // some logic if  total > 21, display bust message
   if (playerScore > 21) {
     // busted
-    document.querySelector('.message').textContent = 'Busted!'
+    displayMessage('Busted!')
     // and disable the hit button
-    document.querySelector('.hit-button').disabled = true
-    document.querySelector('.stay-button').disabled = true
+    disablePlayerActions()
+    showDealerHand()
+  }
+}
+
+const playerStay = () => {
+  // disable the hit button & stay button
+  disablePlayerActions()
+
+  // reveal dealer hand
+  showDealerHand()
+
+  // dealer logic
+  // while dealer < 17 give the dealer cards
+  while (dealerScore < 17) {
+    dealCardToDealer()
+    showDealerHand()
+  }
+  // declare winner (comparing dealer score and player score)
+
+  if (dealerScore > 21) {
+    // if dealer > 21
+    // player wins
+    displayMessage('player wins, dealer busts')
+  } else if (playerScore > 21) {
+    // if player > 21
+    // dealer wins
+    displayMessage('dealer wins, player bust')
+  } else if (playerScore === dealerScore) {
+    // if player == dealer
+    // draw (push)
+    displayMessage('tie')
+  } else {
+    // else  the player with the highest total wins
+    if (playerScore > dealerScore) {
+      displayMessage('player wins, both under 21')
+    } else if (playerScore < dealerScore) {
+      displayMessage('dealer wins, both under 21')
+    } else {
+      displayMessage('Not sure how, but i got here???')
+    }
   }
 }
 
@@ -120,3 +184,4 @@ const main = () => {
 
 document.addEventListener('DOMContentLoaded', main)
 document.querySelector('.hit-button').addEventListener('click', playerHit)
+document.querySelector('.stay-button').addEventListener('click', playerStay)
