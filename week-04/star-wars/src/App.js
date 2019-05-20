@@ -4,10 +4,26 @@ import NavBar from './components/NavBar'
 import Character from './components/Character'
 
 const characters = [
-  { name: 'Evil Sith Lord' },
-  { name: 'Tobias Beckett' },
-  { name: 'Obi wan' },
-  { name: 'Poe, Ace Pilot' }
+  {
+    name: 'Evil Sith Lord',
+    description: 'This bumbling idiot....',
+    imageUrl: 'https://placekitten.com/200/200'
+  },
+  {
+    name: 'Tobias Beckett',
+    description: 'This smuggler and idiot....',
+    imageUrl: 'https://placekitten.com/200/200'
+  },
+  {
+    name: 'Obi wan',
+    description: 'This cool guy',
+    imageUrl: 'https://placekitten.com/200/200'
+  },
+  {
+    name: 'Poe, Ace Pilot',
+    description: 'This guy flies well',
+    imageUrl: 'https://placekitten.com/200/200'
+  }
 ]
 
 class App extends Component {
@@ -17,39 +33,21 @@ class App extends Component {
         <NavBar />
         <main>
           <ul class="character-list">
+            <Character
+              name="Yoda"
+              description="The tiny green master..."
+              pictureUrl="https://placekitten.com/200/400"
+            />
+
             {characters.map(character => {
-              return <Character name={character.name} />
+              return (
+                <Character
+                  name={character.name}
+                  description={character.description}
+                  pictureUrl={character.imageUrl}
+                />
+              )
             })}
-            {/* <li>
-              <article class="character">
-                 <img src="/images/jar-jar.jpg" alt="Jar Jar Binks" />
-                <p></p>
-                <p></p>
-              </article>
-            </li>
-            <li>
-              <article class="character">
-                <img src="/images/tobias.jpg" alt="Jar Jar Binks" />
-                <header></header>
-                <p>Smuggler</p>
-                <p>This smuggler and idiot....</p>
-              </article>
-            </li>
-            <li>
-              <article class="character">
-                {/* <img src="/images/obi-wan.jpg" alt="Jar Jar Binks" />
-                <header>Obi wan</header>
-                <p>Jedi</p>
-                <p>This awesome guy...</p>
-              </article>
-            </li>
-            <li>
-              <article class="character">
-                {/* <img src="/images/poe.png" alt="Jar Jar Binks" />
-                <p>Ace Pilot</p>
-                <p>This guy makes bad choices....</p>
-              </article>
-            </li> */}
           </ul>
         </main>
       </>

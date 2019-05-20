@@ -25,7 +25,7 @@ body {
 }
 
 .character-list>li {
-  border: 30px dotted goldenrod;
+  /* border: 30px dotted goldenrod; */
   margin: 3rem;
   background-color: orchid;
 }
