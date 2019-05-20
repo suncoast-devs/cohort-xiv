@@ -32,7 +32,7 @@ class App extends Component {
       <>
         <NavBar />
         <main>
-          <ul class="character-list">
+          <ul className="character-list">
             <Character
               name="Yoda"
               description="The tiny green master..."
@@ -42,6 +42,7 @@ class App extends Component {
             {characters.map(character => {
               return (
                 <Character
+                  key={character.name}
                   name={character.name}
                   description={character.description}
                   pictureUrl={character.imageUrl}

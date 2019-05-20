@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 class NavBar extends Component {
   render() {
     return (
-      <header class="page-header">
+      <header className="page-header">
         <h1>Best Star Wars Characters</h1>
       </header>
     )

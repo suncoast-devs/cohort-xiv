@@ -4,7 +4,7 @@ class Character extends Component {
   render() {
     return (
       <li>
-        <article class="character">
+        <article className="character">
           {/* <img src="/images/jar-jar.jpg" alt="Jar Jar Binks" /> */}
           <p>{this.props.name}</p>
           <p>{this.props.description}</p>
