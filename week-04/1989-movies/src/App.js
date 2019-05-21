@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
-import HelloWorld from './components/HelloWorld'
-
+import Header from './components/Header'
+import MovieList from './components/MovieList'
 class App extends Component {
   render() {
-    return <HelloWorld />
+    return (
+      <>
+        <Header />
+        <MovieList />
+      </>
+    )
   }
 }
 
