@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
-import HelloWorld from './components/HelloWorld'
+import Header from './components/Header'
+import DiceRoller from './components/DiceRoller.js'
 
 class App extends Component {
   render() {
-    return <HelloWorld />
+    return (
+      <>
+        <Header />
+        <DiceRoller />
+      </>
+    )
   }
 }
 

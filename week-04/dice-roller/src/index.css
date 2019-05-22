@@ -10,3 +10,27 @@ body {
   margin: 0;
   min-height: 100%;
 }
+
+.roll-1 {
+  color: rebeccapurple;
+}
+
+.roll-2 {
+  color: magenta;
+}
+
+.roll-3 {
+  color: lightsalmon;
+}
+
+.roll-4 {
+  color: limegreen;
+}
+
+.roll-5 {
+  color: seagreen;
+}
+
+.roll-6 {
+  color: goldenrod;
+}
