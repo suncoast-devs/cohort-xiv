@@ -26,12 +26,12 @@ class App extends Component {
 
   render() {
     return (
-      <>
+      <section>
         <main
           style={{
             backgroundColor: `hsl(${this.state.hue},${this.state.saturation}%,${
               this.state.lightness
-            }%)`
+            }%, 0.${this.state.alpha})`
           }}
         >
           <Header
@@ -80,7 +80,7 @@ class App extends Component {
           </section>
           <button onClick={this.randomColour}>Random Colour</button>
         </main>
-      </>
+      </section>
     )
   }
 }
