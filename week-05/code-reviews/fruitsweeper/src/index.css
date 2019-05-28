@@ -1,0 +1,66 @@
+:root {
+  font: 16px / 1 sans-serif;
+}
+
+html {
+  height: 100%;
+  background: aliceblue;
+}
+
+h1 {
+  font-display: bolder;
+  padding: 1rem;
+}
+
+body {
+  margin: 2rem;
+  padding: 1rem;
+  min-height: 100%;
+  text-align: center;
+  border-radius: 1.5rem;
+  /* background-color: #0d21a1; */
+  background: content-box radial-gradient(peru, #0d21a1);
+}
+
+.background-here-please {
+  background: no-repeat url('./images/dogpark.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+table {
+  color: whitesmoke;
+  /* background-color: mediumaquamarine; */
+  /* height: 20rem; */
+  /* border: solid salmon 2rem; */
+  margin: 2rem;
+  padding: 2rem;
+}
+
+#center-this {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.game-box {
+  border: groove gray 0.1rem;
+  background-color: gray;
+  margin: 0;
+  padding: 1rem;
+}
+
+.reveal {
+  background-color: bisque;
+}
+
+.puppy-bomb {
+  background-image: url('/src/images/poop-solid.svg');
+  background-size: contain;
+}
+
+.puppy-flag {
+  background-image: url('/src/images/dog-solid.svg');
+  background-size: contain;
+}
