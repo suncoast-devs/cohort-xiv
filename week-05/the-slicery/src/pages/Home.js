@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 
 import { Link } from 'react-router-dom'
 
+import data from '../data/foods.json'
+
 class Home extends Component {
   render() {
     return (
@@ -10,10 +12,14 @@ class Home extends Component {
         <h2>We'll slice you, a good slice</h2>
         <section>
           We have:
-          <Link to="/pies">PIES!</Link>
-          <Link to="/cookies">Cookies!</Link>
+          {Object.keys(data.foods).map(foodGroup => {
+            return (
+              <Link key={foodGroup} to={`/${foodGroup}`}>
+                {foodGroup}!
+              </Link>
+            )
+          })}
           <Link to="/cannibals">Cannibals!</Link>
-          <Link to="/cakes">Cakes!</Link>
         </section>
       </div>
     )

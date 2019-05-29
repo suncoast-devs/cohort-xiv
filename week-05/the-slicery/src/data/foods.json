@@ -1,0 +1,91 @@
+{
+  "foods": {
+    "pies": {
+      "tagline": "PIEE!!!!!",
+      "treats": [
+        {
+          "image": "https://res.cloudinary.com/dbtqsg7vf/image/upload/v1559153663/pumpkin.jpg",
+          "title": "Pumpking",
+          "numberLeft": 22,
+          "containsNuts": true,
+          "feeds": 1
+        },
+        {
+          "image": "https://res.cloudinary.com/dbtqsg7vf/image/upload/v1559153662/smores.jpg",
+          "title": "S'mores",
+          "numberLeft": 82,
+          "containsNuts": false,
+          "feeds": 10
+        },
+        {
+          "image": "https://res.cloudinary.com/dbtqsg7vf/image/upload/v1559153662/apple.jpg",
+          "title": "Apple!!!",
+          "numberLeft": 63,
+          "containsNuts": true,
+          "feeds": 1
+        },
+        {
+          "image": "https://res.cloudinary.com/dbtqsg7vf/image/upload/v1559153663/sugar-cream.jpg",
+          "title": "Suga Cream",
+          "numberLeft": 27,
+          "containsNuts": true,
+          "feeds": 9
+        }
+      ]
+    },
+    "cakes": {
+      "tagline": "These cakes aren't a lie",
+      "treats": [
+        {
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP9CquUTD-ynFzZ40gDaA8UfOi_uSpaCbZuQNCva79thuYCLsPyA",
+          "title": "Unicorn",
+          "numberLeft": 1,
+          "feeds": 3,
+          "containsNuts": true
+        },
+        {
+          "image": "https://aclassictwist.com/wp-content/uploads/2014/08/Birthday-Ice-Cream-Cake-480x360.jpg",
+          "title": "Birthday",
+          "numberLeft": 55,
+          "feeds": 1,
+          "containsNuts": true
+        },
+        {
+          "image": "https://i.kym-cdn.com/photos/images/newsfeed/000/115/357/portal-cake.jpg?1318992465",
+          "title": "Is a Lie!",
+          "numberLeft": 47,
+          "feeds": 1,
+          "containsNuts": true
+        }
+      ]
+    },
+    "cookies": {
+      "tagline": "Cookie monster approved",
+      "treats": [
+        {
+          "image": "https://lh4.googleusercontent.com/-Qv02PhRQges/Tvqs5_4KEFI/AAAAAAAA1Is/H2caPL8SvNs/s800/fried-oreos-19.jpg",
+          "title": "Deep Fried Oreo's",
+          "numberLeft": 53,
+          "feeds": 2,
+          "containsNuts": false,
+          "className": "cookie"
+        },
+
+        {
+          "image": "https://lh4.googleusercontent.com/-Qv02PhRQges/Tvqs5_4KEFI/AAAAAAAA1Is/H2caPL8SvNs/s800/fried-oreos-19.jpg",
+          "title": "Chocolate chip cookies",
+          "numberLeft": 45,
+          "feeds": 3,
+          "containsNuts": true
+        },
+        {
+          "image": "https://www.justsotasty.com/wp-content/uploads/2018/08/Edible-Cookie-Dough-5.jpg",
+          "title": "cookie dough",
+          "numberLeft": 27,
+          "feeds": 8,
+          "containsNuts": true
+        }
+      ]
+    }
+  }
+}

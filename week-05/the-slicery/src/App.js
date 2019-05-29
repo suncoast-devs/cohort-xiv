@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Home from './pages/Home'
-import Pies from './pages/Pies'
-import Cakes from './pages/Cakes'
+
 import Cannibals from './pages/Cannibals'
-import Cookies from './pages/Cookies'
-import Pumpkin from './pages/Pumpkin'
+import BakeryList from './pages/BakeryList'
+import Pastry from './pages/Pastry'
 
 class App extends Component {
   render() {
@@ -29,11 +28,14 @@ class App extends Component {
         <Router>
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/pies" exact component={Pies} />
-            <Route path="/pies/pumpkin" exact component={Pumpkin} />
-            <Route path="/cakes" exact component={Cakes} />
+            <Route path="/:tummyTreat" exact component={BakeryList} />
+            <Route
+              path="/:tummyTreat/:treatyMcTreatFace"
+              exact
+              component={Pastry}
+            />
+            {/* <Route path="/pies/pumpkin" exact component={Pumpkin} /> */}
             <Route path="/cannibals" exact component={Cannibals} />
-            <Route path="/cookies" exact component={Cookies} />
           </Switch>
         </Router>
       </>
