@@ -23,6 +23,7 @@ class App extends Component {
     // const firstName = this.state.firstName
     // const score = this.state.score
     // const cardsLeft = this.state.cardsLeft
+
     return (
       <>
         <Router>
