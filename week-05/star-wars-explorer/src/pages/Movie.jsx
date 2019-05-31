@@ -1,20 +1,38 @@
 import React, { Component } from 'react'
-
 import axios from 'axios'
+
 import ErrorMessage from '../components/ErrorMessage'
 import MovieComponent from '../components/MovieComponent'
 
 class Movie extends Component {
-  state = { movie: {} }
+  state = {
+    movie: {},
+    errorMessage: null
+  }
+
   componentDidMount() {
     const movieId = this.props.match.params.id
 
     if (!isNaN(parseInt(movieId))) {
-      axios.get(`https://swapi.co/api/films/${movieId}`).then(resp => {
-        this.setState({
-          movie: resp.data
+      axios
+        .get(`https://swapi.co/api/films/${movieId}`)
+        .then(resp => {
+          console.log({ resp })
+          if (resp.status === 200) {
+            this.setState({
+              movie: resp.data
+            })
+          } else {
+            this.setState({
+              errorMessage: 'API is down, go for walk.'
+            })
+          }
         })
-      })
+        .catch(error => {
+          this.setState({
+            errorMessage: error.message
+          })
+        })
     } else {
       this.setState({
         errorMessage: 'That is not a movie id, try again'
