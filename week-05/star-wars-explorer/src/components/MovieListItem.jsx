@@ -7,7 +7,7 @@ class MovieListItem extends Component {
     const movieId = splitted[splitted.length - 2]
     console.log({ splitted, movieId })
     return (
-      <Link to={`/Movies/${movieId}`}>
+      <Link to={`/Movie/${movieId}`}>
         <h1>{this.props.movie.title}</h1>
         <h2>
           <Moment format="MMM Do, YYYY">{this.props.movie.release_date}</Moment>

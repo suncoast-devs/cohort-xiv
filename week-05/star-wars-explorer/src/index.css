@@ -2,11 +2,22 @@
   font: 16px / 1 sans-serif;
 }
 
-html {
+body, #root, html {
   height: 100%;
 }
 
 body {
   margin: 0;
   min-height: 100%;
+}
+
+.error-message {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background-color: crimson;
 }
