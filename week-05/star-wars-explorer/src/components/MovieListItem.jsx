@@ -1,8 +1,19 @@
 import React, { Component } from 'react'
+import Moment from 'react-moment'
 
 class MovieListItem extends Component {
   render() {
-    return <div>{this.props.movie.title}</div>
+    return (
+      <div>
+        <h1>{this.props.movie.title}</h1>
+        <h2>
+          <Moment format="MMM Do, YYYY">{this.props.movie.release_date}</Moment>
+        </h2>
+        <h3>Planets: {this.props.movie.planets.length}</h3>
+        <h3>Characters: {this.props.movie.characters.length}</h3>
+        <hr />
+      </div>
+    )
   }
 }
 
