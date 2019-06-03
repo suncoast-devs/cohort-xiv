@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
-import HelloWorld from './components/HelloWorld'
 
-class App extends Component {
-  render() {
-    return <HelloWorld />
-  }
+import Counter from './components/Counter'
+import Weather from './components/Weather'
+export default function App() {
+  return (
+    <>
+      <Weather />
+      <Counter startingCount={13} mermaidCount={8} tribe={'under the sea'} />
+    </>
+  )
 }
-
-export default App
