@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Moment from 'react-moment'
 import axios from 'axios'
-import { isTSEnumDeclaration } from '@babel/types'
 
 const TOKEN = 'spokesperson row improve cane'
 const API_URL = 'http://one-list-api.herokuapp.com/'
