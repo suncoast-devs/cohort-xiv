@@ -12,6 +12,68 @@ body {
   background-color: antiquewhite;
 }
 
+header {
+  font-size: 3rem;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+}
+
 .completed>.item-text {
   text-decoration: line-through;
+}
+
+form {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ul {
+  display: flex;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+ul>li {
+  width: 35%;
+  margin: 1rem;
+  padding: 1rem;
+  box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+  border: 5px grey outset;
+}
+
+ul>li p {
+  margin: 0;
+  padding: 0;
+}
+
+.item-text {
+  margin-bottom: 0.5rem;
+}
+
+time {
+  font-size: 0.8rem;
+  font-style: italic;
+  color: grey;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.button-container button {
+  margin: 0.25rem;
+  width: 90%;
+  text-transform: uppercase;
+}
+
+button:hover {
+  background-color: aqua;
+  color: orangered;
 }

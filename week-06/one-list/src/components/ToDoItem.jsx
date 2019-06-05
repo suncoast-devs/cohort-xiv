@@ -34,15 +34,18 @@ export default function ToDoItem(props) {
 
   return (
     <li className={isCompleted ? 'completed' : ''}>
-      <button onClick={toggleCompletion}>
-        {isCompleted ? 'undo' : 'complete'}
-      </button>
       <p className="item-text">{props.item.text}</p>
 
       <Moment fromNow>{props.item.created_at}</Moment>
-      <button>edit</button>
-      <button onClick={() => props.deleteItem(props.item.id)}>delete</button>
-      {errorMessage && <p className="errorMessage">{errorMessage}</p>}
+      <hr />
+      <div className="button-container">
+        <button onClick={toggleCompletion}>
+          {isCompleted ? 'undo' : 'complete'}
+        </button>
+        <button>edit</button>
+        <button onClick={() => props.deleteItem(props.item.id)}>delete</button>
+        {errorMessage && <p className="errorMessage">{errorMessage}</p>}
+      </div>
     </li>
   )
 }
