@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import Moment from 'react-moment'
 import axios from 'axios'
+import ToDoItem from './ToDoItem'
 
 const TOKEN = 'spokesperson row improve cane'
 const API_URL = 'http://one-list-api.herokuapp.com/'
@@ -55,16 +55,7 @@ export default function ToDoList() {
       </form>
       <ul>
         {taskList.map(item => {
-          return (
-            <li key={item.id}>
-              <button>mark as complete</button>
-              <p>{item.text}</p>
-
-              <Moment fromNow>{item.created_at}</Moment>
-              <button>edit</button>
-              <button onClick={() => deleteItem(item.id)}>delete</button>
-            </li>
-          )
+          return <ToDoItem key={item.id} item={item} deleteItem={deleteItem} />
         })}
       </ul>
     </section>
