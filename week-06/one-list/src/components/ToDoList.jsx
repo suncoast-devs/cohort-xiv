@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import ToDoItem from './ToDoItem'
-import { COPYFILE_EXCL } from 'constants'
 
 const TOKEN = 'spokesperson row improve cane'
 const API_URL = 'http://one-list-api.herokuapp.com/'
@@ -9,6 +8,7 @@ const API_URL = 'http://one-list-api.herokuapp.com/'
 export default function ToDoList() {
   const [task, setTask] = useState('')
   const [taskList, setTaskList] = useState([])
+  const [lastDelete, setLastDeleted] = useState([])
 
   useEffect(() => {
     axios.get(`${API_URL}/items?access_token=${TOKEN}`).then(resp => {
@@ -43,14 +43,21 @@ export default function ToDoList() {
 
   const clearCompletedItems = () => {
     console.log('clearing items')
-    // find all the items where completed = true
-    axios.get(`${API_URL}/items?access_token=${TOKEN}`).then(resp => {
-      const completed = resp.data.filter(f => f.complete)
-      console.log({ completed })
-      completed.forEach(item => {
-        deleteItem(item.id)
+    if (window.confirm('Are you sure?')) {
+      // find all the items where completed = true
+      axios.get(`${API_URL}/items?access_token=${TOKEN}`).then(resp => {
+        const completed = resp.data.filter(f => f.complete)
+        console.log({ completed })
+        setLastDeleted(completed)
+        completed.forEach(item => {
+          deleteItem(item.id)
+        })
       })
-    })
+    }
+  }
+
+  const undoLastDelete = () => {
+    setTaskList(oldList => oldList.concat(lastDelete))
   }
 
   // const updateCompleteStatus = itemId => {
@@ -61,7 +68,7 @@ export default function ToDoList() {
   // }
 
   return (
-    <section>
+    <section class="content">
       <form onSubmit={addTaskToList}>
         <input
           type="text"
