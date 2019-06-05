@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import ToDoItem from './ToDoItem'
+import { COPYFILE_EXCL } from 'constants'
 
 const TOKEN = 'spokesperson row improve cane'
 const API_URL = 'http://one-list-api.herokuapp.com/'
@@ -40,6 +41,25 @@ export default function ToDoList() {
       })
   }
 
+  const clearCompletedItems = () => {
+    console.log('clearing items')
+    // find all the items where completed = true
+    axios.get(`${API_URL}/items?access_token=${TOKEN}`).then(resp => {
+      const completed = resp.data.filter(f => f.complete)
+      console.log({ completed })
+      completed.forEach(item => {
+        deleteItem(item.id)
+      })
+    })
+  }
+
+  // const updateCompleteStatus = itemId => {
+  //   // find the item in the taskList
+  //   // update that Item
+  //   // update the value in the hook
+
+  // }
+
   return (
     <section>
       <form onSubmit={addTaskToList}>
@@ -53,6 +73,7 @@ export default function ToDoList() {
         />
         <button>+</button>
       </form>
+      <button onClick={clearCompletedItems}>clear completed?</button>
       <ul>
         {taskList.map(item => {
           return <ToDoItem key={item.id} item={item} deleteItem={deleteItem} />
