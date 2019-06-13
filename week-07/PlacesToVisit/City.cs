@@ -9,5 +9,6 @@ namespace PlacesToVisit
     public int SizeInSquareMiles { get; set; }
     public float Elevation { get; set; }
     public int Population { get; set; }
+    public bool Visited { get; set; } = false;
   }
 }
