@@ -4,6 +4,7 @@ import axios from 'axios'
 
 const TOKEN = 'spokesperson row improve cane'
 const API_URL = 'http://one-list-api.herokuapp.com/'
+const OUR_API_URL = 'https://localhost:5001/api'
 
 export default function ToDoItem(props) {
   const [isCompleted, setIsCompleted] = useState(props.item.complete)
@@ -12,10 +13,9 @@ export default function ToDoItem(props) {
   const toggleCompletion = () => {
     setIsCompleted(oldIsCompleted => !oldIsCompleted)
     axios
-      .put(`${API_URL}/items/${props.item.id}?access_token=${TOKEN}`, {
-        item: {
-          complete: !isCompleted
-        }
+      .put(`${OUR_API_URL}/items/${props.item.id}?access_token=${TOKEN}`, {
+        complete: !isCompleted,
+        text: props.item.text
       })
       .then(resp => {
         console.log({ resp })

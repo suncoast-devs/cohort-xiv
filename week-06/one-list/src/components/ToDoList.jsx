@@ -4,6 +4,7 @@ import ToDoItem from './ToDoItem'
 
 const TOKEN = 'spokesperson row improve cane'
 const API_URL = 'http://one-list-api.herokuapp.com/'
+const OUR_API_URL = 'https://localhost:5001/api'
 
 export default function ToDoList() {
   const [task, setTask] = useState('')
@@ -11,7 +12,7 @@ export default function ToDoList() {
   const [lastDelete, setLastDeleted] = useState([])
 
   useEffect(() => {
-    axios.get(`${API_URL}/items?access_token=${TOKEN}`).then(resp => {
+    axios.get(`${OUR_API_URL}/items?access_token=${TOKEN}`).then(resp => {
       setTaskList(resp.data)
     })
   }, [])
@@ -20,10 +21,8 @@ export default function ToDoList() {
     e.preventDefault()
     console.log({ task })
     axios
-      .post(`${API_URL}/items?access_token=${TOKEN}`, {
-        item: {
-          text: task
-        }
+      .post(`${OUR_API_URL}/items?access_token=${TOKEN}`, {
+        text: task
       })
       .then(resp => {
         console.log({ resp })
@@ -34,7 +33,7 @@ export default function ToDoList() {
 
   const deleteItem = itemId => {
     axios
-      .delete(`${API_URL}/items/${itemId}?access_token=${TOKEN}`)
+      .delete(`${OUR_API_URL}/items/${itemId}?access_token=${TOKEN}`)
       .then(resp => {
         // update our list
         setTaskList(oldList => oldList.filter(item => item.id !== itemId))
@@ -44,15 +43,22 @@ export default function ToDoList() {
   const clearCompletedItems = () => {
     console.log('clearing items')
     if (window.confirm('Are you sure?')) {
-      // find all the items where completed = true
-      axios.get(`${API_URL}/items?access_token=${TOKEN}`).then(resp => {
-        const completed = resp.data.filter(f => f.complete)
-        console.log({ completed })
-        setLastDeleted(completed)
-        completed.forEach(item => {
-          deleteItem(item.id)
-        })
+      axios.delete(`${OUR_API_URL}/items/completed`).then(resp => {
+        console.log({ resp })
+        // update state by removing completed items
+        setTaskList(oldList =>
+          oldList.filter(item => !resp.data.ids.includes(item.id))
+        )
       })
+      // // find all the items where completed = true
+      // axios.get(`${OUR_API_URL}/items?access_token=${TOKEN}`).then(resp => {
+      //   const completed = resp.data.filter(f => f.complete)
+      //   console.log({ completed })
+      //   setLastDeleted(completed)
+      //   completed.forEach(item => {
+      //     deleteItem(item.id)
+      //   })
+      // })
     }
   }
 

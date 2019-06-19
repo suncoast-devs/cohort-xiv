@@ -7,7 +7,17 @@ POST items
 
 GET item
 PUT item
+PUT /api/items/2
+{
+text:"",
+complete:true/false
+}
+
 DELETE item
+
+DELETE AllCompletedItems
+DELETE api/items/completed
+/
 
 ## Models
 

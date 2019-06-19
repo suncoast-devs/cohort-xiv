@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using todolistapi;
 using ToDoListApi.Models;
+using ToDoListApi.ViewModels;
 
 namespace ToDoListApi.Controllers
 {
@@ -11,11 +13,17 @@ namespace ToDoListApi.Controllers
   public class ItemsController : ControllerBase
   {
 
+    private DatabaseContext db;
+
+    public ItemsController()
+    {
+      this.db = new DatabaseContext();
+    }
+
     [HttpGet]
     public ActionResult<List<ToDoItem>> Get()
     {
       // get all of our tolist items
-      var db = new DatabaseContext();
       var rv = db.ToDoItems;
       return rv.ToList();
     }
@@ -23,7 +31,6 @@ namespace ToDoListApi.Controllers
     [HttpPost]
     public ActionResult<ToDoItem> Post([FromBody]ToDoItem somethingGoofy)
     {
-      var db = new DatabaseContext();
       db.ToDoItems.Add(somethingGoofy);
       db.SaveChanges();
       return somethingGoofy;
@@ -32,8 +39,6 @@ namespace ToDoListApi.Controllers
     [HttpGet("{id}")]
     public ActionResult<ToDoItem> GetOneItem(int id)
     {
-      var db = new DatabaseContext();
-
       // where 
       var where = db.ToDoItems.Where(item => item.Id == id);
       // find
@@ -49,6 +54,65 @@ namespace ToDoListApi.Controllers
 
       return firstOrDefault;
 
+    }
+
+
+    [HttpPut("{id}")]
+    public ActionResult<ToDoItem> UpdateItem([FromRoute]int id, [FromBody]ToDoItem item)
+    {
+      // i need to update the item text, complete, and updated at
+      var elephants = db.ToDoItems.FirstOrDefault(f => f.Id == id);
+      elephants.Text = item.Text;
+      elephants.Complete = item.Complete;
+      elephants.Updated_At = DateTime.Now;
+      db.SaveChanges();
+      return elephants;
+    }
+
+    [HttpDelete("{id}")]
+    public ActionResult DeleteItem(int id)
+    {
+
+
+      // try
+      // {
+      //   var item = db.ToDoItems.SingleOrDefault(s => s.Id == id);
+      //   db.ToDoItems.Remove(item);
+      //   db.SaveChanges();
+      //   return Ok();
+      // }
+      // catch (System.ArgumentNullException ex)
+      // {
+      //   return NotFound();
+      // }
+
+
+      var item = db.ToDoItems.FirstOrDefault(f => f.Id == id);
+      if (item == null)
+      {
+        return NotFound();
+      }
+      else
+      {
+        db.ToDoItems.Remove(item);
+        db.SaveChanges();
+        return Ok();
+      }
+    }
+
+    [HttpDelete("completed")]
+    public ActionResult<DeleteCompletedResponse> DeleteAllCompletedItems()
+    {
+      var rv = new DeleteCompletedResponse();
+      var itemsToDelete = db.ToDoItems.Where(item => item.Complete);
+
+      rv.NumberDeleted = itemsToDelete.Count();
+      rv.Ids = itemsToDelete.Select(s => s.Id).ToList();
+      rv.ContainsChocolate = itemsToDelete.Any(item => item.Text.ToLower().Contains("chocolate"));
+
+      db.ToDoItems.RemoveRange(itemsToDelete);
+      db.SaveChanges();
+      return rv;
     }
 
   }
