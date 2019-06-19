@@ -12,51 +12,16 @@ body {
   background-color: #e5f9e0;
 }
 
-p {
-  padding: 0;
-  margin: 0;
-}
-
 h1 {
-  font-family: 'Lobster Two', cursive;
-}
-.page-header {
-  text-align: center;
-  margin: 1rem;
-  font-size: 4rem;
+  color: blue;
+  background-color: yellow;
+  border: 1px solid blue
 }
 
-.sub-title {
-  text-align: center;
+.red-text {
+  color: red;
 }
 
-.callout-text {
-  color: pink;
-  font-size: 2.1rem;
-}
-
-.command-list {
-  margin: 1rem;
-  padding: 0;
-}
-
-.command-list > li {
-  background-color: #774e24;
-  color: #e5f9e0;
-  border: 0.25rem solid #6e0d25;
-  margin-bottom: 1rem;
-  border-radius: 5px;
-}
-
-.command-list > li > header {
-  background-color: #ffffb3;
-  color: black;
-  padding: 1rem;
-  font-size: 1.5rem;
-}
-
-.command-list > li > p {
-  padding: 1rem;
-  min-height: 4rem;
-  font-size: 1.25rem;
+#bigger-Font {
+  font-size: 4reml
 }
