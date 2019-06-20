@@ -9,5 +9,8 @@ namespace ToDoListApi.Models
     public DateTime Created_At { get; set; } = DateTime.Now;
     public DateTime Updated_At { get; set; } = DateTime.Now;
     public bool Complete { get; set; } = false;
+
+    public int? UserId { get; set; }
+    public User User { get; set; }
   }
 }
