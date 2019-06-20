@@ -29,8 +29,27 @@ namespace ToDoListApi.Controllers
     }
 
     [HttpPost]
-    public ActionResult<ToDoItem> Post([FromBody]ToDoItem somethingGoofy)
+    public ActionResult<ToDoItem> Post([FromBody]ToDoItem somethingGoofy, [FromQuery]string access_token)
     {
+      if (String.IsNullOrWhiteSpace(access_token))
+      {
+        return Unauthorized();
+      }
+
+      // get the user that has teh access token
+      var user = db.Users.FirstOrDefault(u => u.AccessToken == access_token);
+      if (user == null)
+      {
+        // if the user doesnt exist, make it
+        user = new User
+        {
+          AccessToken = access_token
+        };
+        db.Users.Add(user);
+        db.SaveChanges();
+      }
+      // set the the item.UserId = user.id
+      somethingGoofy.UserId = user.Id;
       db.ToDoItems.Add(somethingGoofy);
       db.SaveChanges();
       return somethingGoofy;
