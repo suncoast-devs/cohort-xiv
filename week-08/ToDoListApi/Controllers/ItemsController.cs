@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using todolistapi;
 using ToDoListApi.Models;
 using ToDoListApi.ViewModels;
@@ -21,11 +22,28 @@ namespace ToDoListApi.Controllers
     }
 
     [HttpGet]
-    public ActionResult<List<ToDoItem>> Get()
+    public ActionResult<List<ToDoItem>> Get([FromQuery] string access_token)
     {
-      // get all of our tolist items
-      var rv = db.ToDoItems;
-      return rv.ToList();
+      if (String.IsNullOrWhiteSpace(access_token))
+      {
+        return Unauthorized();
+      }
+
+      var data = db.Users.Include(i => i.ToDoItems).FirstOrDefault(u => u.AccessToken == access_token);
+      return data.ToDoItems;
+
+
+      // // get all of our tolist items
+      // var user = db.Users.FirstOrDefault(u => u.AccessToken == access_token);
+      // if (user == null)
+      // {
+      //   return new List<ToDoItem>();
+      // }
+      // else
+      // {
+      //   var rv = db.ToDoItems.Where(t => t.UserId == user.Id);
+      //   return rv.ToList();
+      // }
     }
 
     [HttpPost]
@@ -49,29 +67,51 @@ namespace ToDoListApi.Controllers
         db.SaveChanges();
       }
       // set the the item.UserId = user.id
-      somethingGoofy.UserId = user.Id;
-      db.ToDoItems.Add(somethingGoofy);
+      // somethingGoofy.UserId = user.Id;
+      // db.ToDoItems.Add(somethingGoofy);
+
+      user.ToDoItems.Add(somethingGoofy);
+
       db.SaveChanges();
       return somethingGoofy;
     }
 
     [HttpGet("{id}")]
-    public ActionResult<ToDoItem> GetOneItem(int id)
+    public ActionResult<ItemViewModel> GetOneItem(int id, [FromQuery] string access_token)
     {
-      // where 
-      var where = db.ToDoItems.Where(item => item.Id == id);
-      // find
-      var find = db.ToDoItems.Find(id);
-      // first
-      var first = db.ToDoItems.First(item => item.Id == id);
-      // first of default
-      var firstOrDefault = db.ToDoItems.FirstOrDefault(item => item.Id == id);
-      // single
-      var single = db.ToDoItems.Single(item => item.Id == id);
-      // single of default
-      var SingleOrDefault = db.ToDoItems.SingleOrDefault(item => item.Id == id);
+      if (String.IsNullOrWhiteSpace(access_token))
+      {
+        return Unauthorized();
+      }
+      var firstOrDefault = db
+        .Users
+        .Include(i => i.ToDoItems)
+        .FirstOrDefault(u => u.AccessToken == access_token)
+        .ToDoItems.FirstOrDefault(item => item.Id == id)
+        ;
 
-      return firstOrDefault;
+      // var firstOrDefault = db.ToDoItems.FirstOrDefault(item => item.Id == id);
+      return new ItemViewModel
+      {
+        Text = firstOrDefault.Text,
+        Id = firstOrDefault.Id,
+        Create_At = firstOrDefault.Created_At,
+        Updated_At = firstOrDefault.Updated_At,
+        UserId = firstOrDefault.UserId
+      };
+
+      // // where 
+      // var where = db.ToDoItems.Where(item => item.Id == id);
+      // // find
+      // var find = db.ToDoItems.Find(id);
+      // // first
+      // var first = db.ToDoItems.First(item => item.Id == id);
+      // // first of default
+      // // single
+      // var single = db.ToDoItems.Single(item => item.Id == id);
+      // // single of default
+      // var SingleOrDefault = db.ToDoItems.SingleOrDefault(item => item.Id == id);
+
 
     }
 
