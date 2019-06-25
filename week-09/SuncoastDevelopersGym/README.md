@@ -1,23 +1,22 @@
-# Defualt Template for SDG .NET Course
+# Use Cases:
 
-This is the default template for a simple .NET Core Web React App. This template has: 
+Explorer Mode:
 
-- CORS Enabled
-- Postgres & EF Core
-- Swagger
-- Ready for Docker Deployment
+- As a gym staff personnel , I can search for a current member to check them in
+- As a gym staff personnel , I can check members into our gym when they arrive on site
+- as a gym staff personnel , I can sign up new members to our gym
+- as a gym staff personnel , I can edit members to our gym
+- as a gym staff personnel , I can delete members to our gym
+- As a gym staff personnel , I can search for existing members
 
-to use:
+Adventure Mode:
 
-- [ ] Update your database name in `DatabaseContext.cs`
+- As a gym staff personnel , I can log in to my site to put my members data behind a log in for each of staff members
+- As a gym staff personnel , I can sign up trainers to be a part of my gym
+- As a gym staff personnel , I can assign trainers to train individual members
 
-to Deploy to heroku:
-- [ ] create a web app on heroku, make sure to have the CLI downloaded, installed, logged in and be logged into the container via heroku. 
-- [ ] Update your `dockerfile` to use your `*.dll` file instead of `dotnet-sdg-template.dll` 
-- [ ] Update the deploy script:
-    - [ ] change `sdg-template-image` to `your-project-name-image`
-    - [ ] change `heroku-web-app` to your web app name on heroku
+Epic Mode:
 
-## PROTIP: 
-
-When you are complete with the project and have turned it in to your instructor, update this read me with details about the assignment. 
+- As a gym staff personnel , I can create classes
+- As a gym staff personnel , I can enroll members in classes
+- As a member, I can sign in, and enroll in my own classes
