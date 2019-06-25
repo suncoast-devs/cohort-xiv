@@ -76,6 +76,13 @@ namespace ToDoListApi.Controllers
       return somethingGoofy;
     }
 
+
+    [HttpPatch]
+    public ActionResult<ToDoItem> Pathching([FromBody]ToDoItem somethingGoofy)
+    {
+      return Ok(new ToDoItem());
+    }
+
     [HttpGet("{id}")]
     public ActionResult<ItemViewModel> GetOneItem(int id, [FromQuery] string access_token)
     {
@@ -83,14 +90,15 @@ namespace ToDoListApi.Controllers
       {
         return Unauthorized();
       }
+
       var firstOrDefault = db
         .Users
         .Include(i => i.ToDoItems)
         .FirstOrDefault(u => u.AccessToken == access_token)
-        .ToDoItems.FirstOrDefault(item => item.Id == id)
-        ;
+        ?.ToDoItems.FirstOrDefault(item => item.Id == id);
 
-      // var firstOrDefault = db.ToDoItems.FirstOrDefault(item => item.Id == id);
+      if (firstOrDefault == null) return NotFound();
+
       return new ItemViewModel
       {
         Text = firstOrDefault.Text,
