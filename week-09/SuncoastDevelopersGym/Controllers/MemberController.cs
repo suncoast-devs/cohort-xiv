@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using SuncoastDevelopersGym.Models;
 using suncoastdevelopersgym;
 
+
+// generated with the command 
+// dotnet aspnet-codegenerator controller -name MemberController -api -m Member -dc DatabaseContext -outDir Controllers
 namespace sdg_react_template.Controllers
 {
   [Route("api/[controller]")]
