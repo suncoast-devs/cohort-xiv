@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using suncoastdevelopersgym.Models;
+using SuncoastDevelopersGym.Models;
 
 namespace suncoastdevelopersgym
 {
@@ -38,13 +38,13 @@ namespace suncoastdevelopersgym
       }
     }
 
-
+    public DbSet<Member> Members { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
       modelBuilder.HasAnnotation("ProductVersion", "2.2.0-rtm-35687");
     }
 
-    public DbSet<Thing> Things { get; set; }
+
   }
 }
