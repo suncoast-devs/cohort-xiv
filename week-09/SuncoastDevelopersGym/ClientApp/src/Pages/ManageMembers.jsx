@@ -69,7 +69,7 @@ class ManageMembers extends Component {
           <ul>
             {this.state.members.map(member => {
               return (
-                <li className="members">
+                <li className="members" key={member.id}>
                   {`${member.firstName} ${member.lastName}`}
                   <button>Delete</button>
                 </li>
