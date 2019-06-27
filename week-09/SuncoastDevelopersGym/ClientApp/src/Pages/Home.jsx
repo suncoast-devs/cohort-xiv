@@ -3,6 +3,7 @@ import axios from 'axios'
 export default function Home() {
   const [members, setMembers] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
+  const [message, setMessage] = useState('')
 
   useEffect(() => {
     axios.get('/api/member').then(resp => {
@@ -16,6 +17,12 @@ export default function Home() {
       setMembers(resp.data)
     })
   }
+
+  const checkInMember = member => {
+    axios.post(`/api/checkin/${member.id}`).then(resp => {
+      setMessage(`Member: ${member.firstName} was successfully checked in`)
+    })
+  }
   return (
     <div>
       <form onSubmit={getSearchResults}>
@@ -26,13 +33,14 @@ export default function Home() {
         />
         <button>search</button>
       </form>
+      <section>{message && <h3>{message}</h3>}</section>
       <main>
         <ul>
           {members.map(member => {
             return (
               <li key={member.id}>
                 {member.firstName} {member.lastName}
-                <button>check in</button>
+                <button onClick={() => checkInMember(member)}>check in</button>
               </li>
             )
           })}

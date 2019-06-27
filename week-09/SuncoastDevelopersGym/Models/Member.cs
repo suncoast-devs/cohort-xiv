@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace SuncoastDevelopersGym.Models
 {
@@ -14,5 +15,7 @@ namespace SuncoastDevelopersGym.Models
     public string EmergencyContactPhone { get; set; }
     public string MemberNumber { get; set; }
     public bool HasPaid { get; set; } = true;
+
+    public List<MemberCheckIn> MemberCheckIns { get; set; } = new List<MemberCheckIn>();
   }
 }

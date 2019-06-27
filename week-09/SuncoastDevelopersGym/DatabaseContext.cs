@@ -39,6 +39,7 @@ namespace suncoastdevelopersgym
     }
 
     public DbSet<Member> Members { get; set; }
+    public DbSet<MemberCheckIn> MemberCheckIns { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
