@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
-
+import axios from 'axios'
 export default function Register() {
+  const submitForm = e => {
+    e.preventDefault()
+  }
+
   return (
     <div>
       <h1 className="display-4">Sign up to be staff member!</h1>
