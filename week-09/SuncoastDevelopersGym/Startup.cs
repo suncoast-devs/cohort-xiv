@@ -9,6 +9,9 @@ using Microsoft.EntityFrameworkCore;
 
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace suncoastdevelopersgym
 {
@@ -45,6 +48,23 @@ namespace suncoastdevelopersgym
       {
         configuration.RootPath = "ClientApp/build";
       });
+
+
+      services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                   .AddJwtBearer(options =>
+                   {
+                     options.TokenValidationParameters = new TokenValidationParameters
+                     {
+                       ValidateIssuer = false,
+                       ValidateAudience = false,
+                       ValidateLifetime = true,
+                       ValidateIssuerSigningKey = true,
+
+                       IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes("some really big random string")
+                    )
+                     };
+                   });
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,6 +90,8 @@ namespace suncoastdevelopersgym
       {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
       });
+
+      app.UseAuthentication();
       app.UseStaticFiles();
       app.UseSpaStaticFiles();
       app.UseMvc(routes =>

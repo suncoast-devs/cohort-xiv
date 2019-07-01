@@ -10,7 +10,7 @@ namespace SuncoastDevelopersGym.Models
     public string PasswordHash { get; set; }
 
     public string FullName { get; set; }
-    public string EmailMember { get; set; }
+    public string Email { get; set; }
 
     public DateTime HiredDate { get; set; } = DateTime.Now;
 

@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using suncoastdevelopersgym;
+using SuncoastDevelopersGym.Models;
+using SuncoastDevelopersGym.Service;
 using SuncoastDevelopersGym.ViewModels;
 
 namespace SuncoastDevelopersGym.Controllers
@@ -28,12 +30,27 @@ namespace SuncoastDevelopersGym.Controllers
     public async Task<ActionResult> Register([FromBody] RegisterViewModel registerInformation)
     {
       // check if the user exists
-      var exists = await _context.Users.AnyAsync(user => user.UserName == registerInformation.Email);
+      var exists = await _context.Users.AnyAsync(u => u.UserName == registerInformation.Email);
       // if exists, return an error
+      if (exists)
+      {
+        return BadRequest(new { message = "user with the email already exists" });
+      }
       // else create a user
+      var user = new User
+      {
+        UserName = registerInformation.Email,
+        Email = registerInformation.Email,
+        FullName = registerInformation.FullName,
+      };
       // hash password
+      var hashed = new AuthService().HashPassword(user, registerInformation.Password);
+      user.PasswordHash = hashed;
+      _context.Users.Add(user);
+      await _context.SaveChangesAsync();
       // return a token so the user can do user things
-      return Ok(registerInformation);
+      var rv = new AuthService().CreateAuthData(user);
+      return Ok(rv);
     }
 
 

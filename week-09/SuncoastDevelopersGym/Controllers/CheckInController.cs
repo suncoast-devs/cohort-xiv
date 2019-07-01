@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using suncoastdevelopersgym;
@@ -9,6 +10,7 @@ namespace SuncoastDevelopersGym.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
+  [Authorize]
   public class CheckInController : ControllerBase
   {
     private DatabaseContext _context;
