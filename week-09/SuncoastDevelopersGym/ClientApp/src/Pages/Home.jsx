@@ -45,6 +45,11 @@ export default function Home() {
         setMessage(`Member: ${member.firstName} was successfully checked in`)
       })
   }
+
+  const signOut = () => {
+    localStorage.clear()
+    window.location.href = '/login'
+  }
   return (
     <div>
       <form onSubmit={getSearchResults}>
@@ -68,6 +73,9 @@ export default function Home() {
           })}
         </ul>
       </main>
+      <section>
+        <button onClick={signOut}>sign out</button>
+      </section>
     </div>
   )
 }
