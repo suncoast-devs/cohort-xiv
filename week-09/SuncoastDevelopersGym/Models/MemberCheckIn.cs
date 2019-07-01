@@ -9,5 +9,10 @@ namespace SuncoastDevelopersGym.Models
 
     public int MemberId { get; set; }
     public Member Member { get; set; }
+
+    // who checked in this member
+
+    public int? UserId { get; set; }
+    public User User { get; set; }
   }
 }

@@ -22,6 +22,11 @@ namespace SuncoastDevelopersGym.Controllers
     [HttpPost("{memberId}")]
     public async Task<ActionResult> CheckInMember([FromRoute]int memberId)
     {
+      //  we need to grab the current user
+      var currentUserName = User.Identity.Name;
+      // get the current user from the database
+      var currentUser = _context.Users.FirstOrDefault(u => u.UserName == currentUserName);
+
       // see if the member exists
       var exists = await _context.Members.AnyAsync(member => member.Id == memberId);
       if (!exists)
@@ -30,7 +35,11 @@ namespace SuncoastDevelopersGym.Controllers
       }
       else
       {
-        var checkIn = new MemberCheckIn { MemberId = memberId };
+        var checkIn = new MemberCheckIn
+        {
+          MemberId = memberId,
+          UserId = currentUser.Id
+        };
         await _context.MemberCheckIns.AddAsync(checkIn);
         await _context.SaveChangesAsync();
         return Ok();
