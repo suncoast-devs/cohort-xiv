@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SuncoastDevelopersGym.Models;
 using suncoastdevelopersgym;
+using Microsoft.AspNetCore.Authorization;
 
 
 // generated with the command 
@@ -15,6 +16,7 @@ namespace sdg_react_template.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
+  [Authorize]
   public class MemberController : ControllerBase
   {
     private readonly DatabaseContext _context;

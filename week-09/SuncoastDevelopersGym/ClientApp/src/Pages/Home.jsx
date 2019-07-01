@@ -6,22 +6,44 @@ export default function Home() {
   const [message, setMessage] = useState('')
 
   useEffect(() => {
-    axios.get('/api/member').then(resp => {
-      setMembers(resp.data)
-    })
+    axios
+      .get('/api/member', {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token')
+        }
+      })
+      .then(resp => {
+        setMembers(resp.data)
+      })
   }, [])
 
   const getSearchResults = e => {
     e.preventDefault()
-    axios.get('/api/search/members?searchTerm=' + searchTerm).then(resp => {
-      setMembers(resp.data)
-    })
+    axios
+      .get('/api/search/members?searchTerm=' + searchTerm, {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token')
+        }
+      })
+      .then(resp => {
+        setMembers(resp.data)
+      })
   }
 
   const checkInMember = member => {
-    axios.post(`/api/checkin/${member.id}`).then(resp => {
-      setMessage(`Member: ${member.firstName} was successfully checked in`)
-    })
+    axios
+      .post(
+        `/api/checkin/${member.id}`,
+        {},
+        {
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('token')
+          }
+        }
+      )
+      .then(resp => {
+        setMessage(`Member: ${member.firstName} was successfully checked in`)
+      })
   }
   return (
     <div>

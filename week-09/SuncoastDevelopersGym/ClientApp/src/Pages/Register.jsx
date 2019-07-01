@@ -14,7 +14,11 @@ export default function Register() {
         email: userName
       })
       .then(resp => {
-        console.log(resp.data)
+        localStorage.setItem('token', resp.data.token)
+
+        localStorage.setItem('expires_at', resp.data.expiresAt)
+        localStorage.setItem('current_user', JSON.stringify(resp.data.user))
+        window.location.href = '/'
       })
   }
 
