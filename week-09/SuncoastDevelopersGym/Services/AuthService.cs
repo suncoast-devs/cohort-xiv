@@ -47,5 +47,10 @@ namespace SuncoastDevelopersGym.Service
     {
       return new PasswordHasher<User>().HashPassword(elephant, passwordToHash);
     }
+
+    public bool VerifyPassword(User user, string providedPassword)
+    {
+      return new PasswordHasher<User>().VerifyHashedPassword(user, user.PasswordHash, providedPassword) == PasswordVerificationResult.Success;
+    }
   }
 }

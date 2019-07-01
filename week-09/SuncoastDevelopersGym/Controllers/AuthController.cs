@@ -21,9 +21,28 @@ namespace SuncoastDevelopersGym.Controllers
     }
 
     [HttpPost("login")]
-    public async Task<ActionResult> LoginIn()
+    public async Task<ActionResult> LoginIn([FromBody] RegisterViewModel loginInfo)
     {
-      return Ok();
+      // does the user exists
+      var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == loginInfo.Email);
+      if (user == null)
+      {
+        return Unauthorized();
+      }
+      else
+      {
+        // validate the password
+        if (new AuthService().VerifyPassword(user, loginInfo.Password))
+        {
+          // create a new token
+          var rv = new AuthService().CreateAuthData(user);
+          return Ok(rv);
+        }
+        else
+        {
+          return Unauthorized();
+        }
+      }
     }
 
     [HttpPost("register")]
