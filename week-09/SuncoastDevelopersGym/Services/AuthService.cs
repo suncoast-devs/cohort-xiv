@@ -9,12 +9,12 @@ using SuncoastDevelopersGym.ViewModel;
 
 namespace SuncoastDevelopersGym.Service
 {
-  public class AuthService
+  public class AuthService : IAuthService
   {
     private double jwtLifespan = 2592000;
     private string jwtSecret = "some really big random string";
 
-    public object CreateAuthData(User user)
+    public AuthData CreateAuthData(User user)
     {
       var expirationTime = DateTime.UtcNow.AddSeconds(jwtLifespan);
 

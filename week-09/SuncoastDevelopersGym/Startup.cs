@@ -12,6 +12,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using SuncoastDevelopersGym.Service;
 
 namespace suncoastdevelopersgym
 {
@@ -36,6 +37,15 @@ namespace suncoastdevelopersgym
       });
 
       services.AddDbContext<DatabaseContext>();
+      /**
+      
+        if (env == "testing"){
+           services.AddTransient<IAuthService, TestAuthService>();
+        } else {
+          services.AddTransient<IAuthService, AuthService>();
+        }
+       */
+      services.AddTransient<IAuthService, MockAuthService>();
       services.AddHealthChecks();
       // Register the Swagger generator, defining 1 or more Swagger documents
       services.AddSwaggerGen(c =>

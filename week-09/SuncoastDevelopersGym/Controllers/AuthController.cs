@@ -15,9 +15,11 @@ namespace SuncoastDevelopersGym.Controllers
   {
 
     private DatabaseContext _context;
-    public AuthController(DatabaseContext context)
+    private IAuthService _auth;
+    public AuthController(DatabaseContext context, IAuthService authService)
     {
       this._context = context;
+      this._auth = authService;
     }
 
     [HttpPost("login")]
@@ -32,10 +34,10 @@ namespace SuncoastDevelopersGym.Controllers
       else
       {
         // validate the password
-        if (new AuthService().VerifyPassword(user, loginInfo.Password))
+        if (this._auth.VerifyPassword(user, loginInfo.Password))
         {
           // create a new token
-          var rv = new AuthService().CreateAuthData(user);
+          var rv = this._auth.CreateAuthData(user);
           return Ok(rv);
         }
         else
@@ -63,12 +65,12 @@ namespace SuncoastDevelopersGym.Controllers
         FullName = registerInformation.FullName,
       };
       // hash password
-      var hashed = new AuthService().HashPassword(user, registerInformation.Password);
+      var hashed = this._auth.HashPassword(user, registerInformation.Password);
       user.PasswordHash = hashed;
       _context.Users.Add(user);
       await _context.SaveChangesAsync();
       // return a token so the user can do user things
-      var rv = new AuthService().CreateAuthData(user);
+      var rv = this._auth.CreateAuthData(user);
       return Ok(rv);
     }
 
