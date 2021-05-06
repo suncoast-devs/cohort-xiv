@@ -21,7 +21,7 @@
     "stylelint-config-standard": "^18.3.0"
   },
   "dependencies": {
-    "json": "^9.0.6",
+    "json": "^10.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "^3.0.1"
